@@ -1,0 +1,122 @@
+body {
+  background-image: url('bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.sidebar-dock {
+  position: fixed;
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(30px) saturate(180%);
+  border-radius: 35px;
+  padding: 15px 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.sidebar-dock::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.05), transparent 50%);
+  border-radius: 35px;
+  pointer-events: none;
+}
+
+.sidebar-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar-icon i {
+  font-size: 30px;
+  color: white;
+}
+
+.main-app-dock {
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  transform: perspective(1000px) rotateX(15deg);
+  transform-style: preserve-3d;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(40px) saturate(180%);
+  border-radius: 60px;
+  padding: 40px 60px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 5;
+}
+
+.main-app-dock::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.05), transparent 50%);
+  border-radius: 60px;
+  pointer-events: none;
+}
+
+.app-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: white;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  position: relative;
+  width: 100px;
+}
+
+.app-icon i {
+  font-size: 55px;
+  border-radius: 20%;
+  padding: 18px;
+  margin-bottom: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  width: 90px;
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-icon span {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.app-color-safari { background-image: linear-gradient(to top right, #40A4ED, #368DDB); color: white; }
+.app-color-appstore { background-image: linear-gradient(to top right, #4CAF50, #2196F3); color: white; }
+.app-color-spotify { background-color: #1DB954; color: white; }
+.app-color-youtube { background-color: #FF0000; color: white; }
+.app-color-apple-tv { background-color: #262626; color: white; }
+.app-color-settings { background-color: #4A4A4A; color: white; }
