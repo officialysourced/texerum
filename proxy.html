@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safari Clone</title>
+    <link rel="stylesheet" href="proxy.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="uv.bundle.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1656502157005715"
+     crossorigin="anonymous"></script>
+     <meta name="google-adsense-account" content="ca-pub-1656502157005715">
+</head>
+<body>
+    <div class="safari-browser-frame">
+        <div class="title-bar">
+            <div class="traffic-lights">
+                <span class="close"></span>
+                <span class="minimize"></span>
+                <span class="maximize"></span>
+            </div>
+            <div class="window-title">Safari</div>
+        </div>
+        <div class="toolbar">
+            <div class="nav-buttons">
+                <button id="back-button"><i class="bi bi-chevron-left"></i></button>
+                <button id="forward-button"><i class="bi bi-chevron-right"></i></button>
+            </div>
+            <div class="address-bar">
+                <input type="text" id="address-input" placeholder="Search or enter website name">
+                <button id="go-button"><i class="bi bi-arrow-right-circle-fill"></i></button>
+            </div>
+            <div class="toolbar-icons">
+                <i class="bi bi-share"></i>
+                <i class="bi bi-bookmark"></i>
+                <i class="bi bi-plus-square"></i>
+            </div>
+        </div>
+        <div class="content-area">
+            <iframe id="proxied-content-iframe" src="about:blank"></iframe>
+        </div>
+    </div>
+
+    <script>
+        const addressInput = document.getElementById('address-input');
+        const goButton = document.getElementById('go-button');
+        const proxiedContentIframe = document.getElementById('proxied-content-iframe');
+        const backButton = document.getElementById('back-button');
+        const forwardButton = document.getElementById('forward-button');
+
+        const UV = new Ultraviolet({
+            prefix: '/uv/',
+            bare: 'https://ghoogle.org/fare//',
+            codec: UV.codec.plain
+        });
+
+        const registerServiceWorker = async () => {
+            if ('serviceWorker' in navigator) {
+                try {
+                    await navigator.serviceWorker.register('/uv.sw.js', {
+                        scope: '/uv/'
+                    });
+                    console.log('Service Worker Registered');
+                } catch (error) {
+                    console.error('Service Worker Registration Failed:', error);
+                }
+            }
+        };
+
+        registerServiceWorker();
+
+        const navigateToUrl = () => {
+            let url = addressInput.value.trim();
+
+            if (!url) {
+                proxiedContentIframe.src = 'about:blank';
+                return;
+            }
+
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                url = 'https://' + url;
+            }
+
+            try {
+                const encodedUrl = UV.codec.encode(url);
+                const proxiedUrl = UV.prefix + encodedUrl;
+                proxiedContentIframe.src = proxiedUrl;
+            } catch (error) {
+                console.error('Error encoding URL:', error);
+                alert('Invalid URL or proxy error: ' + error.message);
+                proxiedContentIframe.src = 'about:blank';
+            }
+        };
+
+        goButton.addEventListener('click', navigateToUrl);
+        addressInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                navigateToUrl();
+            }
+        });
+
+        backButton.addEventListener('click', () => {
+            proxiedContentIframe.contentWindow.history.back();
+        });
+        forwardButton.addEventListener('click', () => {
+            proxiedContentIframe.contentWindow.history.forward();
+        });
+
+        proxiedContentIframe.addEventListener('load', () => {
+            try {
+                const currentIframeSrc = proxiedContentIframe.contentWindow.location.href;
+                if (currentIframeSrc.startsWith(UV.prefix)) {
+                    const decodedUrl = UV.codec.decode(currentIframeSrc.substring(UV.prefix.length));
+                    addressInput.value = decodedUrl;
+                } else {
+                    addressInput.value = currentIframeSrc;
+                }
+            } catch (e) {
+                console.warn('Could not decode iframe URL:', e);
+                addressInput.value = '';
+            }
+        });
+    </script>
+</body> 
+</html>

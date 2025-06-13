@@ -1,5 +1,6 @@
+<!-- thanks mk for UV! he da goat -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> ?
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,9 @@
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1656502157005715"
+     crossorigin="anonymous"></script>
+     <meta name="google-adsense-account" content="ca-pub-1656502157005715"> 
 </head>
 <body>
     <div class="sidebar-dock">
@@ -25,32 +28,49 @@
             <i class="bi bi-image-fill"></i>
         </div>
     </div>
-
     <div class="main-app-dock">
-        <div class="app-icon">
+        <div class="app-icon app-trigger" data-target="proxy.html">
             <i class="bi bi-compass-fill app-color-safari"></i>
             <span>Safari</span>
         </div>
-        <div class="app-icon">
+        <div class="app-icon app-trigger" data-target="ai.html">
             <i class="bi bi-robot"></i>
             <span>AI</span>
         </div>
-        <div class="app-icon">
+        <div class="app-icon app-trigger" data-target="spotify.html">
             <i class="bi bi-spotify app-color-spotify"></i>
             <span>Spotify</span>
         </div>
-        <div class="app-icon">
+        <div class="app-icon app-trigger" data-target="youtube.html">
             <i class="bi bi-youtube app-color-youtube"></i>
             <span>YouTube</span>
         </div>
-        <div class="app-icon">
+        <div class="app-icon app-trigger" data-target="textv.html">
             <i class="bi bi-tv-fill app-color-apple-tv"></i>
             <span>TexTV</span>
         </div>
-        <div class="app-icon">
+        <div class="app-icon app-trigger" data-target="settings.html">
             <i class="bi bi-gear-fill app-color-settings"></i>
             <span>Settings</span>
         </div>
     </div>
+
+    <script>
+        document.querySelectorAll('.app-trigger').forEach(icon => {
+            icon.addEventListener('click', function() {
+                const mainAppDock = document.querySelector('.main-app-dock');
+                mainAppDock.classList.add('expanded');
+                mainAppDock.innerHTML = '';
+
+                const iframe = document.createElement('iframe');
+                iframe.src = 'proxy.html';
+                iframe.style.width = '100%'; 
+                iframe.style.height = '100%'; 
+                iframe.style.border = 'none';
+                iframe.style.borderRadius = 'inherit';
+                mainAppDock.appendChild(iframe);
+            });
+        });
+    </script>
 </body>
 </html>

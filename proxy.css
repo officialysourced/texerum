@@ -1,0 +1,154 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #e5e5e5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.safari-browser-frame {
+    width: 100%;
+    height: 100%;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.title-bar {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: #ededed;
+    border-bottom: 1px solid #dcdcdc;
+    position: relative;
+    -webkit-app-region: drag;
+}
+
+.traffic-lights {
+    display: flex;
+    gap: 8px;
+    -webkit-app-region: no-drag;
+}
+
+.traffic-lights span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.traffic-lights .close {
+    background-color: #ff5f56;
+}
+
+.traffic-lights .minimize {
+    background-color: #ffbd2e;
+}
+
+.traffic-lights .maximize {
+    background-color: #27c93f;
+}
+
+.window-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 13px;
+    color: #555;
+    font-weight: 500;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #dcdcdc;
+    gap: 8px;
+}
+
+.nav-buttons button {
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    color: #555;
+    padding: 4px 6px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.nav-buttons button:hover {
+    background-color: #e0e0e0;
+}
+
+.nav-buttons button:disabled {
+    color: #bbb;
+    cursor: default;
+}
+
+.address-bar {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    background-color: #ebebeb;
+    border-radius: 8px;
+    padding: 5px 10px;
+    gap: 5px;
+}
+
+.address-bar input {
+    flex-grow: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 13px;
+    color: #333;
+    padding: 0;
+}
+
+.address-bar button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #555;
+    cursor: pointer;
+    padding: 0 4px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.address-bar button:hover {
+    background-color: #dcdcdc;
+}
+
+.toolbar-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.toolbar-icons i {
+    font-size: 18px;
+    color: #555;
+    cursor: pointer;
+}
+
+.content-area {
+    flex-grow: 1;
+    padding: 0;
+    background-color: #fdfdfd;
+    overflow: hidden;
+    display: flex;
+}
+
+#proxied-content-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
